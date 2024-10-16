@@ -15,8 +15,8 @@ type props = {
   };
 
 export default function Container({
-  width = "2rem",
-  height = "2rem",
+  width = "",
+  height = "",
   pb = "1rem",
   pl = "1rem",
   pr = "1rem",
@@ -28,7 +28,7 @@ export default function Container({
   borderRadius = "2px",
   borderStyle = "solid",
   borderColor = "black",
-  borderWidth = "0",
+  borderWidth = "2px",
   backgroundColor = "transparent",
   children,
 }: props) {

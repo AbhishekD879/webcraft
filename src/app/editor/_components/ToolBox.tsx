@@ -5,7 +5,9 @@ import { Element, useEditor } from "@craftjs/core";
 import { ArrowRight, Image, Layout, Type } from "lucide-react";
 import { Text } from "../_editor_component/Text";
 import Container from "../_editor_component/Container";
-
+import ContainerSection from "./ContainerSection";
+import { Button as EditorBtn } from "../_editor_component/Button";
+import ResizerCustom from "./ResizerCustom";
 export default function ToolBox() {
   const { connectors, query } = useEditor();
   return (
@@ -42,7 +44,9 @@ export default function ToolBox() {
                   connectors.create(
                     ref,
                     <Element
-                      is={Container}
+                      is={ResizerCustom}
+                      width="100%"
+                      height="2rem"
                       canvas
                     ></Element>
                   );
@@ -55,6 +59,14 @@ export default function ToolBox() {
               Section
             </Button>
             <Button
+                 ref={(ref: HTMLButtonElement | null) => {
+                    if (ref) {
+                      connectors.create(
+                        ref,
+                        <EditorBtn/>
+                      );
+                    }
+                  }}
               variant="outline"
               className="flex flex-col items-center py-4"
             >
