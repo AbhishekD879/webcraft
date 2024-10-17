@@ -2,6 +2,10 @@
 import React from "react";
 import { useNode } from "@craftjs/core";
 import ResizeWrapper from "./ResizeWrapper";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Layout } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type FlexContainerProps = {
   justifyContent?: string;
@@ -48,69 +52,99 @@ export const FlexContainerInner = ({
 };
 
 const FlexContainerToolbarSettings = () => {
-  const { setProp, justifyContent, alignItems, flexDirection, flexWrap } =
-    useNode((node) => ({
+    const { setProp, justifyContent, alignItems, flexDirection, flexWrap } = useNode((node) => ({
       justifyContent: node.data.props.justifyContent,
       alignItems: node.data.props.alignItems,
       flexDirection: node.data.props.flexDirection,
       flexWrap: node.data.props.flexWrap,
-    }));
-
-  return (
-    <div>
-      <h2>Flex Container Settings</h2>
-      <label>
-        Justify Content
-        <select
-          value={justifyContent}
-          onChange={(e) =>
-            setProp((prop) => (prop.justifyContent = e.target.value))
-          }
-        >
-          <option value="flex-start">Flex Start</option>
-          <option value="center">Center</option>
-          <option value="flex-end">Flex End</option>
-          <option value="space-between">Space Between</option>
-          <option value="space-around">Space Around</option>
-        </select>
-      </label>
-      <label>
-        Align Items
-        <select
-          value={alignItems}
-          onChange={(e) => setProp((prop) => (prop.alignItems = e.target.value))}
-        >
-          <option value="stretch">Stretch</option>
-          <option value="center">Center</option>
-          <option value="flex-start">Flex Start</option>
-          <option value="flex-end">Flex End</option>
-        </select>
-      </label>
-      <label>
-        Flex Direction
-        <select
-          value={flexDirection}
-          onChange={(e) =>
-            setProp((prop) => (prop.flexDirection = e.target.value))
-          }
-        >
-          <option value="row">Row</option>
-          <option value="column">Column</option>
-        </select>
-      </label>
-      <label>
-        Flex Wrap
-        <select
-          value={flexWrap}
-          onChange={(e) => setProp((prop) => (prop.flexWrap = e.target.value))}
-        >
-          <option value="nowrap">No Wrap</option>
-          <option value="wrap">Wrap</option>
-        </select>
-      </label>
-    </div>
-  );
-};
+    }))
+  
+    return (
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="flex-container-settings">
+          <AccordionTrigger className="text-sm font-medium">
+            <Layout className="w-4 h-4 mr-2" />
+            Flex Container Settings
+          </AccordionTrigger>
+          <AccordionContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="justify-content" className="text-xs font-medium">
+                Justify Content
+              </Label>
+              <Select
+                value={justifyContent}
+                onValueChange={(value) => setProp((props) => (props.justifyContent = value))}
+              >
+                <SelectTrigger id="justify-content">
+                  <SelectValue placeholder="Select justify content" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="flex-start">Flex Start</SelectItem>
+                  <SelectItem value="center">Center</SelectItem>
+                  <SelectItem value="flex-end">Flex End</SelectItem>
+                  <SelectItem value="space-between">Space Between</SelectItem>
+                  <SelectItem value="space-around">Space Around</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="align-items" className="text-xs font-medium">
+                Align Items
+              </Label>
+              <Select
+                value={alignItems}
+                onValueChange={(value) => setProp((props) => (props.alignItems = value))}
+              >
+                <SelectTrigger id="align-items">
+                  <SelectValue placeholder="Select align items" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="stretch">Stretch</SelectItem>
+                  <SelectItem value="center">Center</SelectItem>
+                  <SelectItem value="flex-start">Flex Start</SelectItem>
+                  <SelectItem value="flex-end">Flex End</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="flex-direction" className="text-xs font-medium">
+                Flex Direction
+              </Label>
+              <Select
+                value={flexDirection}
+                onValueChange={(value) => setProp((props) => (props.flexDirection = value))}
+              >
+                <SelectTrigger id="flex-direction">
+                  <SelectValue placeholder="Select flex direction" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="row">Row</SelectItem>
+                  <SelectItem value="column">Column</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="flex-wrap" className="text-xs font-medium">
+                Flex Wrap
+              </Label>
+              <Select
+                value={flexWrap}
+                onValueChange={(value) => setProp((props) => (props.flexWrap = value))}
+              >
+                <SelectTrigger id="flex-wrap">
+                  <SelectValue placeholder="Select flex wrap" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nowrap">No Wrap</SelectItem>
+                  <SelectItem value="wrap">Wrap</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    )
+  }
 
 export const FlexContainer = () => {
   const {
