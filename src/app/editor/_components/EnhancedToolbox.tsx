@@ -31,6 +31,8 @@ import { Button as EditorBtn } from "./../_editor_component/Button";
 import { VideoComponent } from "../_editor_component/EditorVideo";
 import { ImageComponent } from "../_editor_component/EditorImage";
 import { ParagraphComponent } from "../_editor_component/EditorParagraph";
+import { Grid } from "../_editor_component/EditorGrid";
+import { FlexContainer } from "../_editor_component/EditorFlex";
 
 // Element and category definitions
 const elements = [
@@ -50,10 +52,22 @@ const elements = [
     component: ParagraphComponent,
     isCanvas: false,
   },
+  {
+    name: "Grid",
+    icon: Layout,
+    component: Grid,
+    isCanvas: true,
+  },
+  {
+    name: "Flex",
+    icon: Layout,
+    component: FlexContainer,
+    isCanvas: true,
+  },
 ];
 
 const categories = [
-  { name: "Basic", elements: ["Text", "Image", "Section", "Button", "Paragraph"] },
+  { name: "Basic", elements: ["Text", "Image", "Section", "Button", "Paragraph","Grid","Flex"] },
   { name: "Media", elements: ["Video", "Document"] },
   { name: "Data", elements: ["Table", "Form"] },
   { name: "Advanced", elements: ["Map", "Code"] },
