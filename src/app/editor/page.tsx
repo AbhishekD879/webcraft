@@ -11,10 +11,11 @@ import {
 } from "lucide-react";
 import { Element, Frame, useEditor } from "@craftjs/core";
 import Link from "next/link";
-import ToolBox from "./_components/ToolBox";
 import EditorComponentSettings from "./_components/EditorComponentSettings";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "./_editor_component/Container";
+import EnhancedToolBox from "./_components/EnhancedToolbox";
+import { ImageInner } from "./_editor_component/EditorImage";
 
 export default function Editor() {
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
@@ -72,7 +73,7 @@ export default function Editor() {
               <ChevronRight className="h-4 w-4" />
             )}
           </Button>
-          {isLeftSidebarOpen && <ToolBox />}
+          {isLeftSidebarOpen && <EnhancedToolBox/>}
         </div>
 
         {/* Editor Canvas */}
@@ -82,7 +83,8 @@ export default function Editor() {
                 Drag and drop elements here
               </CardContent> */}
             <Frame>
-              <Element is={Container} canvas></Element>
+              <Element is={Container} width="100%" height="100%" canvas>
+              </Element>
             </Frame>
           </Card>
         </main>

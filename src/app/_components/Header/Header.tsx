@@ -13,8 +13,8 @@ import Link from "next/link";
 
 export function Header() {
   return (
-    <header className="bg-white border-b max-w-7xl mx-auto">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="bg-white border-b w-full mx-auto">
+      <div className="px-4 py-3 flex items-center justify-between w-full">
         <div className="flex items-center space-x-4">
           <Link href="/">
             <h1 className="text-3xl font-bold text-primary">WebCraft</h1>

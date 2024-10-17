@@ -11,7 +11,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <Header />
-          <main className="max-w-7xl mx-auto">{children}</main>
+          <main className="w-full mx-auto">{children}</main>
         </body>
       </html>
     </ClerkProvider>
