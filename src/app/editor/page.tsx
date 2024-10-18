@@ -8,6 +8,9 @@ import {
   Smartphone,
   Tablet,
   ChevronRight,
+  Undo,
+  Redo,
+  RotateCcw,
 } from "lucide-react";
 import { Element, Frame, useEditor } from "@craftjs/core";
 import Link from "next/link";
@@ -16,13 +19,17 @@ import { useState } from "react";
 import Container from "./_editor_component/Container";
 import EnhancedToolBox from "./_components/EnhancedToolbox";
 import { ImageInner } from "./_editor_component/EditorImage";
+import AutoSave from "./_components/AutoSave";
 
 export default function Editor() {
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
   const toggleLeftSidebar = () => setIsLeftSidebarOpen(!isLeftSidebarOpen);
   const toggleRightSidebar = () => setIsRightSidebarOpen(!isRightSidebarOpen);
-
+  const { canUndo, canRedo, actions } = useEditor((state, query) => ({
+    canUndo: query.history.canUndo(),
+    canRedo: query.history.canRedo()
+  }));
   return (
     <div className="flex-1 flex flex-col h-screen">
       <nav className="bg-white p-4 flex justify-between items-center border-b">
@@ -45,6 +52,19 @@ export default function Editor() {
               <Smartphone className="h-5 w-5" />
               <span className="sr-only">Mobile view</span>
             </Button>
+          </div>
+          <div className="flex items-center space-x-2 border-l pl-4">
+            <Button onClick={() => canUndo && actions.history.undo()} variant="ghost" size="icon">
+              <Undo className="h-5 w-5" />
+              <span className="sr-only">Undo</span>
+            </Button>
+            <Button onClick={() => canRedo && actions.history.redo()} variant="ghost" size="icon">
+              <Redo className="h-5 w-5" />
+              <span className="sr-only">Redo</span>
+            </Button>
+          </div>
+          <div className="flex items-center space-x-2 border-l pl-4">
+            <AutoSave/>
           </div>
         </div>
         <div className="flex gap-2">

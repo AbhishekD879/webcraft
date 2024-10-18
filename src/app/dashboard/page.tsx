@@ -1,22 +1,95 @@
-import { Button } from "@/components/ui/button";
+"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Plus, Search, Globe, Layout, BarChart } from "lucide-react";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Plus, Search, FileText, Link } from "lucide-react"
+import { useFormState } from "react-dom"
+import { createSite } from '../actions';
+import { useUser } from "@clerk/nextjs"
+import { useRouter } from "next/navigation"
+import SiteCardContainer from "./_components/SiteCardContainer"
 
 function Page() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [siteName, setSiteName] = useState("")
+  const [subdomain, setSubdomain] = useState("")
+  const {user} = useUser()
+  const router = useRouter()
+  if(!user){
+    router.push('/sign-in')
+    return null
+  }
+  const [state,action]= useFormState(createSite,null)
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold">My Websites</h2>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" /> New Website
-        </Button>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <Button>
+              <Plus className="mr-2 h-4 w-4" /> New Website
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Create New Website</DialogTitle>
+              <DialogDescription>
+                Enter the details for your new website. Click save when you're done.
+              </DialogDescription>
+            </DialogHeader>
+            <form action={action}>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="site-name" className="flex justify-center items-center gap-1">
+                    <FileText className="h-4 w-4 inline-block" />
+                    <p className="flex-1">Site Name</p>
+                  </Label>
+                  <Input
+                    id="site-name"
+                    name="site-name"
+                    value={siteName}
+                    type="text"
+                    placeholder="My Website"
+                    onChange={(e) => setSiteName(e.target.value)}
+                    className="col-span-3"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="subdomain" className="flex justify-center items-center gap-1">
+                    <Link className="h-5 w-5 inline-block" />
+                    <p className="flex-1">Subdomain</p>
+                  </Label>
+                  <Input
+                    id="subdomain"
+                    value={subdomain}
+                    name="subdomain"
+                    type="text"
+                    placeholder="my-site"
+                    onChange={(e) => setSubdomain(e.target.value)}
+                    className="col-span-3"
+                    required
+                  />
+                </div>
+                <input name="userId" hidden value={user.id} />
+              </div>
+              <DialogFooter>
+                <Button type="submit">Save</Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="mb-6">
         <div className="relative max-w-sm">
@@ -25,35 +98,10 @@ function Page() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[1, 2, 3].map((i) => (
-          <Card key={i}>
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between">
-                <span>My Cool Website {i}</span>
-                <Globe className="h-5 w-5 text-muted-foreground" />
-              </CardTitle>
-              <CardDescription>Last edited 2 days ago</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <img
-                src={`/placeholder.svg?height=150&width=300&text=Website ${i} Preview`}
-                alt={`Website ${i} preview`}
-                className="w-full h-36 object-cover rounded-md mb-4"
-              />
-              <div className="flex justify-between text-sm text-muted-foreground">
-                <span className="flex items-center">
-                  <Layout className="mr-1 h-4 w-4" /> 5 pages
-                </span>
-                <span className="flex items-center">
-                  <BarChart className="mr-1 h-4 w-4" /> 1.2k views
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        <SiteCardContainer/>
       </div>
     </main>
-  );
+  )
 }
 
-export default Page;
+export default Page

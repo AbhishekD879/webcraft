@@ -15,7 +15,7 @@ export default function Indicators({ nodeRef, drag }: props) {
     actions.delete(nodeRef.id);
   };
   return (
-    <div className="absolute -top-4 right-0 z-99999 flex gap-2 items-center border border-black">
+    <div className="absolute -top-4 right-0 z-[9999999] flex gap-2 items-center border border-black">
       <div
         ref={(ref) => {
           if (ref) {

@@ -15,6 +15,7 @@ type FlexContainerProps = {
   width?: string;
   height?: string;
   parConnect?: any;
+  children?: React.ReactNode;
 };
 
 export const FlexContainerInner = ({
@@ -25,11 +26,9 @@ export const FlexContainerInner = ({
   width = "100%",
   height = "100%",
   parConnect,
+  children
 }: FlexContainerProps) => {
-  const {
-    connectors: { connect },
-  } = useNode();
-
+  
   return (
     <div
       //@ts-ignore
@@ -46,6 +45,7 @@ export const FlexContainerInner = ({
         height,
       }}
     >
+        {children && children}
       {/* Children components go here */}
     </div>
   );
@@ -146,7 +146,7 @@ const FlexContainerToolbarSettings = () => {
     )
   }
 
-export const FlexContainer = () => {
+export const FlexContainer = ({children}:{children?:any}) => {
   const {
     connectors: { connect },
     nodeProps,
@@ -156,7 +156,9 @@ export const FlexContainer = () => {
 
   return (
     <ResizeWrapper>
-      <FlexContainerInner parConnect={connect} {...nodeProps} />
+      <FlexContainerInner parConnect={connect} {...nodeProps}>
+        {children}
+      </FlexContainerInner>
     </ResizeWrapper>
   );
 };

@@ -14,6 +14,7 @@ type GridProps = {
   width?: string;
   height?: string;
   parConnect?: any;
+  children?:React.ReactNode
 };
 
 export const GridInner = ({
@@ -22,6 +23,7 @@ export const GridInner = ({
   width = "100%",
   height = "100%",
   parConnect,
+  children
 }: GridProps) => {
   const {
     connectors: { connect },
@@ -41,7 +43,7 @@ export const GridInner = ({
         height,
       }}
     >
-      {/* Children components go here */}
+      {children}
     </div>
   );
 };
@@ -123,7 +125,7 @@ const GridToolbarSettings = () => {
   }
   
 
-export const Grid = () => {
+export const Grid = ({children}:{children?:any}) => {
   const {
     connectors: { connect },
     nodeProps,
@@ -133,7 +135,9 @@ export const Grid = () => {
 
   return (
     <ResizeWrapper>
-      <GridInner parConnect={connect} {...nodeProps} />
+      <GridInner parConnect={connect} {...nodeProps}>
+        {children}
+      </GridInner>
     </ResizeWrapper>
   );
 };
@@ -145,8 +149,8 @@ Grid.craft = {
   props: {
     columns: "repeat(3, 1fr)",
     gap: "10px",
-    width: "500px",
-    height: "200px",
+    width: "100%",
+    height: "100%",
   },
   displayName: "Grid",
 };

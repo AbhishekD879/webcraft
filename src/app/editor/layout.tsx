@@ -11,6 +11,7 @@ import ResizeWrapper from "./_editor_component/ResizeWrapper";
 import { Grid } from "./_editor_component/EditorGrid";
 import { FlexContainer } from "./_editor_component/EditorFlex";
 import { ParagraphComponent } from "./_editor_component/EditorParagraph";
+import { InlineTextComponent } from "./_editor_component/EditorText";
 export default function layout({children}:{
   children:any
 }) {
@@ -28,8 +29,7 @@ export default function layout({children}:{
             ParagraphComponent,
             ResizeWrapper,
             ResizerCustom,
-            ImageInner
-            // Inner
+            InlineTextComponent,
           }}
 
         >

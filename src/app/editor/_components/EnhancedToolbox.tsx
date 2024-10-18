@@ -33,10 +33,11 @@ import { ImageComponent } from "../_editor_component/EditorImage";
 import { ParagraphComponent } from "../_editor_component/EditorParagraph";
 import { Grid } from "../_editor_component/EditorGrid";
 import { FlexContainer } from "../_editor_component/EditorFlex";
+import { InlineTextComponent } from "../_editor_component/EditorText";
 
 // Element and category definitions
 const elements = [
-  { name: "Text", icon: Type, component: "p", isCanvas: false },
+  { name: "Text", icon: Type, component: InlineTextComponent, isCanvas: false },
   { name: "Image", icon: Image, component: ImageComponent, isCanvas: true },
   { name: "Section", icon: Layout, component: ResizerCustom, isCanvas: true },
   { name: "Button", icon: ButtonIcon, component: EditorBtn, isCanvas: false },
@@ -122,8 +123,6 @@ export default function EnhancedToolBox() {
                                   element.isCanvas ? (
                                     <Element
                                       is={element.component}
-                                      width="100%"
-                                      height="2rem"
                                       canvas
                                     ></Element>
                                   ) : (

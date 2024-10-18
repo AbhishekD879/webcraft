@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    redirects: [
+        {
+          source: "/",
+          destination: "/dashboard",
+          permanent: true,
+        },
+      ],
+};
 
 export default nextConfig;

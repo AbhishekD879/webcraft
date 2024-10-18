@@ -61,7 +61,8 @@ export const ButtonInner = ({
         height,
       }}
     >
-      <Element is={Text} id="editor_btn_text" fontSize={fontSize} text={text} />
+     {text}
+      {/* <Element is={Text} id="editor_btn_text" fontSize={fontSize} text={text} /> */}
     </button>
   );
 };
