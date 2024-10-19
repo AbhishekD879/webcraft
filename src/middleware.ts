@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)", "/"]);
+const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)", "/",]);
 
 export default clerkMiddleware((auth, request) => {
   if (!isPublicRoute(request)) {
@@ -27,6 +27,16 @@ export default clerkMiddleware((auth, request) => {
   }else{
     if (process.env.NODE_ENV === "development") {
         if (currentHost !== "localhost:3000" && currentHost !== "www") {
+          // Rewrite the URL to the [domain] route with the subdomain as the parameter
+          const pathWithDomain = url.pathname === "/" 
+            ? `/${currentHost}` 
+            : `/${currentHost}${url.pathname}`;
+            
+          console.log(`Rewriting to: ${pathWithDomain}`);
+          return NextResponse.rewrite(new URL(pathWithDomain, request.url));
+        }
+      }else{
+        if (currentHost!== "www") {
           // Rewrite the URL to the [domain] route with the subdomain as the parameter
           const pathWithDomain = url.pathname === "/" 
             ? `/${currentHost}` 

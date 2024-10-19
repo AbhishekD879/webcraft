@@ -8,6 +8,27 @@
       "when": 1729225108190,
       "tag": "0000_curious_tarot",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1729277647633,
+      "tag": "0001_cultured_luke_cage",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729278212430,
+      "tag": "0002_eager_valeria_richards",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1729311123527,
+      "tag": "0003_unique_genesis",
+      "breakpoints": true
     }
   ]
 }

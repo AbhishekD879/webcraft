@@ -27,7 +27,7 @@ import {
   NotepadText,
 } from "lucide-react";
 import ResizerCustom from "./ResizerCustom";
-import { Button as EditorBtn } from "./../_editor_component/Button";
+import { Button as EditorBtn } from "../_editor_component/Button";
 import { VideoComponent } from "../_editor_component/EditorVideo";
 import { ImageComponent } from "../_editor_component/EditorImage";
 import { ParagraphComponent } from "../_editor_component/EditorParagraph";

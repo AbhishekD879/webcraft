@@ -15,7 +15,7 @@ export default function SiteCardContainer() {
     fetchData(); // Call the async function
   }, []); // Empty dependency array to run once on mount
   if(!data){
-    return <p>Loading...</p>; // Show a loading message while data is being fetched.
+    return <p className="text-black">Loading...</p>; // Show a loading message while data is being fetched.
   }
   return <>
     {data.map((site) => (

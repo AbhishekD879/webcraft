@@ -15,12 +15,13 @@ import {
 import { Label } from "@/components/ui/label"
 import { Plus, Search, FileText, Link } from "lucide-react"
 import { useFormState } from "react-dom"
-import { createSite } from '../actions';
+import { createSite } from '../../actions';
 import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import SiteCardContainer from "./_components/SiteCardContainer"
 
 function Page() {
+  const [state,action]= useFormState(createSite,null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [siteName, setSiteName] = useState("")
   const [subdomain, setSubdomain] = useState("")
@@ -30,7 +31,6 @@ function Page() {
     router.push('/sign-in')
     return null
   }
-  const [state,action]= useFormState(createSite,null)
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">

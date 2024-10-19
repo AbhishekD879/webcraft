@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Element, useEditor } from "@craftjs/core";
 import { ArrowRight, Image, Layout, Type } from "lucide-react";
-import { Text } from "../_editor_component/Text";
-import Container from "../_editor_component/Container";
+import { Text } from "../../_editor_component/Text";
+import Container from "../../_editor_component/Container";
 import ContainerSection from "./ContainerSection";
-import { Button as EditorBtn } from "../_editor_component/Button";
+import { Button as EditorBtn } from "../../_editor_component/Button";
 import ResizerCustom from "./ResizerCustom";
 export default function ToolBox() {
   const { connectors, query } = useEditor();

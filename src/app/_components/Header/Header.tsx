@@ -29,22 +29,6 @@ export function Header() {
                   Dashboard
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/templates"
-                  className="text-lg font-medium hover:text-primary"
-                >
-                  Templates
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/editor"
-                  className="text-lg font-medium hover:text-primary"
-                >
-                  Editor
-                </Link>
-              </li>
             </ul>
           </nav>
         </div>

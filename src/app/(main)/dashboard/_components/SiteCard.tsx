@@ -22,12 +22,12 @@ export default function SiteCard({
   subdomain: string | null;
 }) {
   return (
-    <Link href={url!}>
+    <Link href={`/editor/${id}`}>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>{name}</span>
-            <Globe className="h-5 w-5 text-muted-foreground" />
+            <Link href={url!}><Globe className="h-5 w-5 text-muted-foreground" /></Link>
           </CardTitle>
           <CardDescription>Last edited 2 days ago</CardDescription>
         </CardHeader>

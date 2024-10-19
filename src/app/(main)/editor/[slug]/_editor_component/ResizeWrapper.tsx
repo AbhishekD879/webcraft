@@ -1,7 +1,8 @@
 import { useNode } from "@craftjs/core";
 import { Resizable } from "re-resizable";
-import Indicators from "../_components/Indicators";
+
 import { useState } from "react";
+import Indicators from "../_components/Indicators";
 
 export default function ResizeWrapper({ children }: { children: any }) {
   const [active, setActive] = useState(false);
