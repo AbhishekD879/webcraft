@@ -9,12 +9,10 @@ import { ParagraphComponent } from "@/app/(main)/editor/[slug]/_editor_component
 import { InlineTextComponent } from "@/app/(main)/editor/[slug]/_editor_component/EditorText";
 import { VideoComponent } from "@/app/(main)/editor/[slug]/_editor_component/EditorVideo";
 import ResizeWrapper from "@/app/(main)/editor/[slug]/_editor_component/ResizeWrapper";
-import { Text } from "@/app/(main)/editor/[slug]/_editor_component/Text";
 import { Editor, Frame } from "@craftjs/core";
 import ReactDOMServer from 'react-dom/server';
 
 const userComponents = {
-    Text,
     EditorBtn,
     Container,
     VideoComponent,

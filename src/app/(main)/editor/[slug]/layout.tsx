@@ -1,7 +1,7 @@
 "use client";
 import { Editor } from "@craftjs/core";
 import { Button as EditorBtn } from "./_editor_component/Button";
-import { Text } from "./_editor_component/Text";
+
 
 import Container from "./_editor_component/Container";
 import { VideoComponent } from "./_editor_component/EditorVideo";
@@ -21,7 +21,6 @@ export default function layout({ children }: { children: any }) {
       <Editor
         enabled={!previewing}
         resolver={{
-          Text,
           EditorBtn,
           Container,
           VideoComponent,

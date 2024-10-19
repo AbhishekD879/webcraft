@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
-import { Text } from "./Text";
+import React from "react";
 import { BoxModel } from "@/lib/types";
-import { Element, useEditor, useNode } from "@craftjs/core";
+import { useNode } from "@craftjs/core";
 import ResizeWrapper from "./ResizeWrapper";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
