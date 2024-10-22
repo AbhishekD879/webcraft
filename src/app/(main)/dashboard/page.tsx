@@ -85,7 +85,7 @@ function Page() {
                 <input name="userId" hidden value={user.id} />
               </div>
               <DialogFooter>
-                <Button type="submit">Save</Button>
+                <Button onClick={()=>setIsDialogOpen(false)} type="submit">Save</Button>
               </DialogFooter>
             </form>
           </DialogContent>

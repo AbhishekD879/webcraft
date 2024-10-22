@@ -19,7 +19,6 @@ import { Sidebar } from "./_components/Sidebar";
 export default function Editor() {
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
-  const [jsonState, setJsonState] = useState("");
   const { previewing, setState: setPreviewing } = useContext(editingContext);
   const editorRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -33,7 +32,7 @@ export default function Editor() {
   useEffect(() => {
     const loadEditorState = async () => {
       const data = await fetchEditorState(pathname.split("/")[2]);
-      setJsonState(JSON.stringify(data[0].savedJsonState));
+      if(data[0].savedJsonState)actions.deserialize(data[0].savedJsonState);
     };
     loadEditorState();
   }, [pathname]);
@@ -74,13 +73,13 @@ export default function Editor() {
 
         <main className="flex-1 p-8 bg-gray-50">
           <Card ref={editorRef} className="w-full aspect-video">
-            <Frame data={jsonState}>
-              {/* <Element
+            <Frame >
+              <Element
                 is={Container}
                 width="100%"
                 height="100%"
                 canvas
-              ></Element> */}
+              ></Element>
             </Frame>
           </Card>
         </main>

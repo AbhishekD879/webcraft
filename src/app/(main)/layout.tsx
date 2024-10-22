@@ -1,9 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import "../globals.css";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Header } from "../_components/Header/Header";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { extractRouterConfig } from "uploadthing/server";
-import { ourFileRouter } from "@/app/api/uploadthing/core";
 export default function RootLayout({
   children,
 }: {
@@ -11,15 +9,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body>
-          {/* @ts-ignore */}
-          {/* <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}> */}
-          <Header />
-          <main className="w-full mx-auto">{children}</main>
-          {/* </NextSSRPlugin> */}
-        </body>
-      </html>
+      <EdgeStoreProvider>
+        <html lang="en">
+          <body>
+            <Header />
+            <main className="w-full mx-auto">{children}</main>
+          </body>
+        </html>
+      </EdgeStoreProvider>
     </ClerkProvider>
   );
 }

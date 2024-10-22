@@ -7,6 +7,13 @@ const nextConfig = {
           permanent: true,
         },
       ],
+      images:{
+        remotePatterns:[
+          {
+            hostname:'utfs.io'
+          }
+        ]
+      }
 };
 
 export default nextConfig;

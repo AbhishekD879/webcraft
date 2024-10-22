@@ -19,7 +19,7 @@ export default function layout({ children }: { children: any }) {
   return (
     <EditingContext>
       <Editor
-        enabled={false}
+        enabled={!previewing}
         resolver={{
           EditorBtn,
           Container,
