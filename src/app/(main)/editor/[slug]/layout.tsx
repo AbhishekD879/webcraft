@@ -5,21 +5,21 @@ import { Button as EditorBtn } from "./_editor_component/Button";
 
 import Container from "./_editor_component/Container";
 import { VideoComponent } from "./_editor_component/EditorVideo";
-import { ImageComponent, ImageInner } from "./_editor_component/EditorImage";
+import { ImageComponent } from "./_editor_component/EditorImage";
 import ResizeWrapper from "./_editor_component/ResizeWrapper";
 import { Grid } from "./_editor_component/EditorGrid";
 import { FlexContainer } from "./_editor_component/EditorFlex";
 import { ParagraphComponent } from "./_editor_component/EditorParagraph";
 import { InlineTextComponent } from "./_editor_component/EditorText";
 import ResizerCustom from "./_components/ResizerCustom";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { EditingContext, editingContext } from "@/lib/context/EditorContext";
 export default function layout({ children }: { children: any }) {
   const { previewing } = useContext(editingContext);
   return (
     <EditingContext>
       <Editor
-        enabled={!previewing}
+        enabled={false}
         resolver={{
           EditorBtn,
           Container,
