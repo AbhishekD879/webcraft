@@ -25,12 +25,22 @@ function Page() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [siteName, setSiteName] = useState("")
   const [subdomain, setSubdomain] = useState("")
+  const [refreshKey, setRefreshKey] = useState(0)
   const {user} = useUser()
   const router = useRouter()
   if(!user){
     router.push('/sign-in')
     return null
   }
+
+  const handleSubmit = async (formData: FormData) => {
+    await action(formData)
+    setIsDialogOpen(false)
+    setSiteName("")
+    setSubdomain("")
+    setRefreshKey(prevKey => prevKey + 1)
+  }
+
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
@@ -48,7 +58,7 @@ function Page() {
                 Enter the details for your new website. Click save when you're done.
               </DialogDescription>
             </DialogHeader>
-            <form action={action}>
+            <form action={handleSubmit}>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-2">
                   <Label htmlFor="site-name" className="flex justify-center items-center gap-1">
@@ -85,7 +95,7 @@ function Page() {
                 <input name="userId" hidden value={user.id} />
               </div>
               <DialogFooter>
-                <Button onClick={()=>setIsDialogOpen(false)} type="submit">Save</Button>
+                <Button type="submit">Save</Button>
               </DialogFooter>
             </form>
           </DialogContent>
@@ -98,7 +108,7 @@ function Page() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <SiteCardContainer/>
+        <SiteCardContainer key={refreshKey} />
       </div>
     </main>
   )

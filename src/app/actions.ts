@@ -1,6 +1,7 @@
 "use server";
 import db  from "@/lib/drizzle";
 import { sites } from "@/lib/schema";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { v4 as uuidv4 } from "uuid";
 // import {} from "uuid"
@@ -33,6 +34,7 @@ export const createSite = async (
       url: `http://${subdomain}.${host}`,
     });
     returnObject.success = true;
+    revalidatePath("/dashboard")
     return returnObject;
   } catch (e: any) {
     console.error("Error creating site", e);

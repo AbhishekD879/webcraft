@@ -32,7 +32,7 @@ export default function Editor() {
   useEffect(() => {
     const loadEditorState = async () => {
       const data = await fetchEditorState(pathname.split("/")[2]);
-      if(data[0].savedJsonState)actions.deserialize(data[0].savedJsonState);
+      if(data[0]?.savedJsonState)actions.deserialize(data[0].savedJsonState);
     };
     loadEditorState();
   }, [pathname]);
@@ -61,6 +61,8 @@ export default function Editor() {
         previewing={previewing}
         setPreviewing={setPreviewing}
         handleEditorStateSave={handleEditorStateSave}
+        editorRef={editorRef}
+        query={query}
       />
       <div className="flex flex-1">
         <Sidebar

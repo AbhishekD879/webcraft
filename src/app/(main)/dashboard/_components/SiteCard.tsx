@@ -33,7 +33,7 @@ export default function SiteCard({
         </CardHeader>
         <CardContent>
           <img
-            src={`/placeholder.svg?height=150&width=300&text=Website`}
+            src='/placeholder.svg'
             alt={`Website  preview`}
             className="w-full h-36 object-cover rounded-md mb-4"
           />

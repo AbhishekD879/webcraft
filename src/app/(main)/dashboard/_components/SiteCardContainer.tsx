@@ -3,25 +3,37 @@ import { useEffect, useState } from "react";
 import SiteCard from "./SiteCard";
 
 export default function SiteCardContainer() {
-  const [data, setData] = useState([]); // Initialize state to hold site data
+  const [data, setData] = useState<any[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Create an async function to fetch data
-      const res = await fetch("/api/site");
-      const { data } = await res.json();
-      console.log(data); // Log the fetched data to the console for debugging purposes.
-      setData(data); // Update state with fetched data
+      setIsLoading(true);
+      try {
+        const res = await fetch("/api/site");
+        const { data } = await res.json();
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching sites:", error);
+        setData([]);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    fetchData(); // Call the async function
-  }, []); // Empty dependency array to run once on mount
-  if (!data) {
-    return <p className="text-black">Loading...</p>; // Show a loading message while data is being fetched.
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <p className="text-black">Loading...</p>;
   }
+
+  if (!data || data.length === 0) {
+    return <p className="text-black">No sites found.</p>;
+  }
+
   return (
     <>
       {data.map((site) => (
-        // @ts-ignore
         <SiteCard key={site.id} {...site} />
       ))}
     </>

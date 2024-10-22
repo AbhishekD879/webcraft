@@ -1,31 +1,52 @@
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
+import { saveEditorState } from "@/lib/api/editorApi";
+import { usePathname } from "next/navigation";
 
-export default function AutoSave() {
+interface AutoSaveProps {
+  editorRef: React.RefObject<HTMLDivElement>;
+  query: any;
+}
+
+export default function AutoSave({ editorRef, query }: AutoSaveProps) {
   const [saving, setSaving] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       if (saving) return;
 
-      // Simulate autosave behavior
       setSaving(true);
       console.log("Auto-saving...");
 
-      // Simulate a delay for the saving process (e.g., 5 seconds for API call)
-      setTimeout(() => {
-        setSaving(false);
-        console.log("Save complete");
-      }, 2 * 1000); // Simulated API save time (2 seconds)
-    }, 10 * 1000); // Autosave every 10 seconds
+      try {
+        if (!editorRef.current?.firstChild?.firstChild) {
+          console.error("Error: Unable to access editor content");
+          return;
+        }
 
-    // Clean up the interval when the component unmounts
+        // @ts-ignore
+        const html = editorRef.current.firstChild.firstChild.outerHTML;
+        const success = await saveEditorState(pathname.split("/")[2], query.serialize(), html);
+
+        if (success) {
+          console.log("Autosave successful");
+        } else {
+          console.error("Autosave failed");
+        }
+      } catch (error) {
+        console.error("Error during autosave:", error);
+      } finally {
+        setSaving(false);
+      }
+    }, 30 * 1000); // Autosave every 30 seconds
+
     return () => clearInterval(interval);
-  }, [saving]); // `saving` as dependency ensures cleanup and reset
+  }, [saving, editorRef, query, pathname]);
 
   return (
-    <Button onClick={() => null} variant="ghost" size="icon">
+    <Button variant="ghost" size="icon">
       <RotateCcw className={`h-5 w-5 ${saving ? 'animate-spin' : ''}`} />
       <span className="sr-only">Autosave</span>
     </Button>

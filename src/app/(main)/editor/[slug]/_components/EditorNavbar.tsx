@@ -20,6 +20,8 @@ interface EditorNavbarProps {
   previewing: boolean;
   setPreviewing: (value: boolean) => void;
   handleEditorStateSave: () => void;
+  editorRef: React.RefObject<HTMLDivElement>;
+  query: any;
 }
 
 export function EditorNavbar({
@@ -29,6 +31,8 @@ export function EditorNavbar({
   previewing,
   setPreviewing,
   handleEditorStateSave,
+  editorRef,
+  query,
 }: EditorNavbarProps) {
   return (
     <nav className="bg-white p-4 flex justify-between items-center border-b">
@@ -71,7 +75,7 @@ export function EditorNavbar({
           </Button>
         </div>
         <div className="flex items-center space-x-2 border-l pl-4">
-          <AutoSave />
+          <AutoSave editorRef={editorRef} query={query} />
         </div>
         <div className="flex items-center space-x-2 border-l pl-4">
           <Button onClick={handleEditorStateSave}>
