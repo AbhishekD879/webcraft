@@ -8,6 +8,7 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Image, Link } from "lucide-react";
+import { UploadDropzone } from "@/lib/uploadthingUtils";
 
 type ImageProps = {
   src?: string;
@@ -187,6 +188,14 @@ const ImageToolbarSettings = () => {
                 value={[parseInt(borderRadius)]}
                 onValueChange={([value]) => setProp((props) => (props.borderRadius = `${value}px`))}
               />
+            </div>
+            <div className="flex justify-center items-center p-3">
+                <UploadDropzone
+                endpoint="imageUploader"
+                onClientUploadComplete={(res)=>{
+                  setProp((props) => (props.src = res[0].url));
+                }}
+                />
             </div>
           </AccordionContent>
         </AccordionItem>

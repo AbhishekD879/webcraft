@@ -14,6 +14,7 @@ export default clerkMiddleware((auth, request) => {
   if (process.env.NODE_ENV === "production") {
     const baseDomain = process.env.BASE_DOMAIN;
     currentHost = hostname?.replace(`.${baseDomain}`, "");
+    console.log("Production Mode", baseDomain, hostname)
   } else {
     currentHost = hostname?.replace(`.localhost:3000`, "");
   }
